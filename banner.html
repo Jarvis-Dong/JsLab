@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>banner</title>
+    <link rel="stylesheet" href="css/banner.css" class="css"/>
+</head>
+<body>
+<input type="button" value="向左" onclick="rollLeft()"/>
+<input type="button" value="向右" onclick="rollRight()"/>
+
+<div class="banner" id="banner">
+    <div class="container" id="container">
+   <ul id="demo1">
+       <li><a href=""><img src="images/images.jpeg" alt=""/></a></li>
+       <li><a href=""><img src="images/images%20(1).jpeg" alt=""/></a></li>
+       <li><a href=""><img src="images/images%20(2).jpeg" alt=""/></a></li>
+       <li><a href=""><img src="images/images%20(3).jpeg" alt=""/></a></li>
+   </ul>
+
+    <ul id="demo2" style="border: 1px solid yellow"></ul>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var area = document.getElementById("banner");
+    var demo1 = document.getElementById("demo1");
+    var demo2 = document.getElementById("demo2");
+    var time =10;
+    var num =3;
+    var myScroll;
+    area.scrollLeft = 1;
+
+  demo2.innerHTML = demo1.innerHTML;
+    function scroll(){
+        if(area.scrollLeft <1){
+            area.scrollLeft = demo1.offsetWidth;
+        }
+       else if(area.scrollLeft > demo1.offsetWidth){
+            area.scrollLeft = 1;
+        }
+        else{
+            area.scrollLeft += num;
+        }
+    }
+
+    myScroll = setInterval(scroll,10);
+
+ /*   function scrollRight(num){
+        if(area.scrollLeft < 1){
+            area.scrollLeft = demo1.offsetWidth;
+        }
+        else{
+            area.scrollLeft += num;
+        }
+
+    }
+
+    function scrollLeft(num){
+
+        if(area.scrollLeft >= demo1.offsetWidth){
+                area.scrollLeft = 0;
+        }
+        else{
+            area.scrollLeft += num;
+        }
+    }
+*/
+    function rollLeft(){
+        num=5;
+//        clearInterval(myScroll);
+//        myScroll = setInterval('scrollLeft(num)',time);
+    }
+
+    function rollRight(){
+        num=-5;
+//        clearInterval(myScroll);
+//        myScroll = setInterval('scrollRight(num)',time);
+    }
+
+    area.onmouseover = function(){
+        clearInterval(myScroll);
+    }
+    area.onmouseout = function(){
+        myScroll = setInterval('scroll()',10);
+    }
+
+    /*var speed = 10;
+    var container = document.getElementById("banner");
+    var pic1= document.getElementById("demo1");
+    var pic2=document.getElementById("demo2");
+    pic2.innerHTML = pic1.innerHTML;
+
+    function rolling(){
+        if(pic2.offsetWidth - container.scrollLeft <= 0){
+            container.scrollLeft-=pic1.offsetWidth
+        }
+        else{
+            container.scrollLeft++;
+        }
+    }
+    var myRolling = setInterval(rolling,speed);
+    container.onmouseover = function () {
+        clearInterval(myRolling)
+    };
+    container.onmouseout=function(){
+        myRolling=setInterval(rolling,speed)
+    };*/
+</script>
+</body>
+</html>

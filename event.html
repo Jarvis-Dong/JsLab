@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>event</title>
+</head>
+<body>
+<div>
+    <input type="button" value="按钮" id="btn"/>
+
+
+</div>
+
+<script>
+
+//    var btn =document.getElementById('btn');
+    function showMes(){
+        alert(this.value);
+    }
+
+//跨浏览器事件处理程序
+    var eventUtil = {
+
+//        添加句柄
+        addHandler:function(element,type,handler){
+            if(element.addEventListener){
+                element.addEventListener(type,handler,false)
+            }else if(element.attachEvent){
+                element.attachEvent('on'+type,handler);
+            }
+            else{
+                element['on'+type]=handler;
+
+            }
+        },
+       //删除句柄
+        removeHandler:function(element,type,handler){
+            if(element.removeEventListener){
+                element.removeEventListener(type,handler,false)
+            }else if(element.detachEvent){
+                element.attachEvent('on'+type,handler);
+            }
+            else{
+                element['on'+type]=null;
+
+            }
+        }
+
+    }
+
+    eventUtil.addHandler(btn,'click',showMes);
+</script>
+</body>
+</html>

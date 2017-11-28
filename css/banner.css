@@ -1,0 +1,39 @@
+body{
+    width: 100%;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+ul,li{
+    list-style: none;
+}
+ul{
+    border: 1px solid #cc6600;
+}
+#indemo{
+    float: left;
+}
+
+
+ul{
+    float: left;
+}
+
+
+
+li{
+    float: left;
+    margin: 5px;
+}
+
+.banner{
+    overflow: hidden;
+    width: 1080px;
+    margin: 0 auto;
+}
+.container{
+
+    overflow: hidden;
+    width: 500%;
+}

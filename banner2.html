@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>banner</title>
+    <link rel="stylesheet" href="css/banner.css" class="css"/>
+</head>
+<body>
+<div class="banner" id="banner">
+    <div class="container" id="container">
+        <ul id="demo1">
+            <li><a href=""><img src="images/images.jpeg" alt=""/></a></li>
+            <li><a href=""><img src="images/images%20(1).jpeg" alt=""/></a></li>
+            <li><a href=""><img src="images/images%20(2).jpeg" alt=""/></a></li>
+            <li><a href=""><img src="images/images%20(3).jpeg" alt=""/></a></li>
+        </ul>
+
+        <ul id="demo2"></ul>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var area = document.getElementById("banner");
+    var demo1 = document.getElementById("demo1");
+    var demo2 = document.getElementById("demo2");
+    demo2.innerHTML = demo1.innerHTML;
+    var img_width = 270;
+    var time;
+
+
+    function startMove(){
+        area.scrollLeft++;
+        time = setInterval("scrollleft()",10);
+    }
+
+    function scrollleft(){
+       area.scrollLeft++;
+        if(area.scrollLeft % img_width ==0){
+            clearInterval(time);
+            setTimeout("startMove()",2000);
+        }
+        else {
+
+            if(area.scrollLeft >= demo1.offsetWidth){
+                area.scrollLeft=0;
+        }
+
+    }
+   var time = setInterval("scrollleft()",10);
+    area.onmouseover = function(){
+        clearInterval(myScroll);
+    }
+
+    area.onmouseout = function(){
+        myScroll = setInterval('scrollleft()',10);
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨浏览器的事件处理程序</title>
+</head>
+<body>
+<input type="button" value="click me" id="myBtn"/>
+<input type="button" value="解除" id="unlisten"/>
+
+<script>
+
+    function $(id){
+        return document.getElementById(id);
+    }
+
+    var EventUtil={
+        fnCount:0
+        ,fnData:{}
+        ,addHandler:function(element,type,handler){
+            this.fnCount++;
+            handler.fid = this.fnCount;
+            var _fn = handler;
+            handler = function(){
+                _fn.call(element);
+            };
+            this.fnData[this.fnCount] = handler;
+
+            if(element.addEventListener){
+                element.addEventListener(type,handler,false);
+            }   else if(element.attachEvent){
+                element.attachEvent("on"+type,handler);
+            }   else {
+                element["on"+type]=handler;
+            }
+        }
+        ,removeHandler:function(element,type,handler){
+            handler = this.fnData[handler.fid];
+            if(element.removeEventListener){
+                element.removeEventListener(type,handler,false);
+            }else if(element.detachEvent){
+                element.detachEvent("on"+type,handler);
+            }else{
+                element["on"+type]=null;
+            }
+        }
+    }
+
+    var btn=$("myBtn");
+    var unbtn = $('unlisten');
+    var bindFn1=function(){
+        alert(this.id);
+    };
+    var bindFn2=function(){
+        alert('2');
+    };
+
+    EventUtil.addHandler(btn,"click",bindFn1);
+    EventUtil.addHandler(btn,"click",bindFn2);
+    //EventUtil.removeHandler(btn,"click",bindFn1);
+    EventUtil.addHandler(unbtn,"click",function(){
+        EventUtil.removeHandler(btn,"click",bindFn1);
+    });
+
+
+</script>
+</body>
+</html>

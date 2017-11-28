@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        .mt1{margin-top:10px;}
+        .mt3{margin-top:20px;}
+        .mt4{margin-top:23px;}
+
+        .mb1{margin-bottom: 60px;}
+        .mb2{margin-bottom: 15px;}
+        .mb4{margin-bottom: 5px;}
+    </style>
+</head>
+<body id="content">
+<div id="test1"  style="margin-top:10px;margin-bottom: 60px;" class="test">
+    <div style="margin-top:15px">
+        <div style="margin-top:20px;"class="mt3">
+            <div style="margin-top:23px;"class="mt4">
+                ppppp
+                <!-- ... -->
+            </div>
+        </div>
+    </div>
+    <!-- ... -->
+    <p>content content content</p>
+    <p>content content content</p>
+    <!-- ... -->
+    <div class="mb2">
+        <div style="margin-bottom:35px">
+            <div class="mb4">44444
+                <!-- ... -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+：-->
+<div class="test mt1 mb1">
+    <div style="margin-top: 15px">
+        <div class="mt3">
+            <div class="mt4">
+               <div class="test"></div>
+
+                <!--或者这些标签中最大的margin-bottom值：-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="test"></div>
+<div class="test"></div>
+
+<script>
+    document.geelec
+   var nodes = document.getElementsByTagName("body")[0].childNodes;
+
+
+   var testdiv = document.getElementById("test1");
+   var classname_test = testdiv.getAttribute("class");
+//   document.write(testdiv);
+
+//   document.write(classname_test);
+
+   var margin_top=0 ;
+   var margin_bottom=0;
+   var temp_top =0;
+   var temp_bottom =0;
+
+   var temp_classname;
+   var node_num = new Array();
+
+
+   /*function getElementsByClassName(classname){
+       for (var i=0 ; i <nodes.length; i++){
+           var node = nodes[i];
+           var child_node = nodes[i].childNodes;
+           if (node.nodeType == 1){
+               temp_classname = node.getAttribute("class");
+               if(temp_classname == classname){
+                   node_num += node;
+               }
+               if(child_node){
+
+               }
+           }
+       }
+
+   }*/
+
+    function getElementByClassName(classname){
+         var tags = document.getElementsByTagName("*");
+         var check = new RegExp('\\b'+classname+'\\b')
+         for (var i=0; i<tags.length;i++){
+             temp_classname = tags[i].getAttribute("class");
+             if(check.test(temp_classname)){
+                node_num.push(tags[i]);
+             }
+         }
+    }
+
+
+    getElementByClassName("test");
+    document.write(node_num.length);
+
+
+
+
+//   document.write(node_num);
+
+
+
+   function findMax(nodes){
+       for (var i=0 ; i < nodes.length;i++){
+
+
+           var node = nodes[i];
+           var child_node = nodes[i].childNodes;
+           if (node.nodeType == 1){
+               temp_top = parseInt(document.defaultView.getComputedStyle(node,null).marginTop);
+               temp_bottom = parseInt(document.defaultView.getComputedStyle(node,null).marginBottom);
+
+               if(temp_top>margin_top){
+                   margin_top = temp_top;
+               }
+               if(temp_bottom>margin_bottom){
+                   margin_bottom = temp_bottom;
+               }
+               if(child_node){
+                   findMax(child_node);
+               }
+           }
+       }
+       return margin_top;
+   }
+   findMax(nodes);
+
+
+
+   document.write("最大的margintop"+margin_top+"px");
+   document.write("最大的marginbottom"+margin_bottom+"px");
+
+
+
+   /* var divs = document.getElementsByTagName("div");
+
+
+    var a=document.defaultView.getComputedStyle(divs[1],null).marginTop;
+    var marginTs = new Array();
+    var margin_max=0;
+    var margin_temp=0;
+
+    for (var i=0; i<divs.length; i++){
+      margin_temp= parseInt( document.defaultView.getComputedStyle(divs[i],null).marginTop);
+         if (margin_max<margin_temp){
+             margin_max=margin_temp
+         }
+    }
+    alert("最大的marginTop值：" + margin_max + "px");
+
+    for (var i=0; i<divs.length; i++){
+        margin_temp= parseInt( document.defaultView.getComputedStyle(divs[i],null).marginBottom);
+        if (margin_max<margin_temp){
+            margin_max=margin_temp
+        }
+    }
+    alert("最大的marginBottom值：" + margin_max +"px");*/
+
+
+
+
+
+
+
+//    alert(parseInt( divs[2].style.marginTop));
+</script>
+</body>
+</html>
